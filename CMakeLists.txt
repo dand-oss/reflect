@@ -12,6 +12,13 @@
 cmake_minimum_required(VERSION 2.6)
 project(reflect)
 
+###############
+# ASI default settings
+list(APPEND CMAKE_MODULE_PATH "$ENV{ASI}/cmake/Modules")
+include(asv_cmake_defaults)
+asv_cmake_defaults( )
+###############
+
 enable_testing()
 
 add_definitions("-Wall -Wextra -Werror -pedantic -g -O3")
@@ -139,8 +146,13 @@ install(
     src/argument.h
     src/argument.tcc
     src/cast.h
+    src/clean_type.h
+    src/error.h
     src/function.h
     src/function.tcc
+    src/function_type.h
+    src/field.h
+    src/field.tcc
     src/scope.h
     src/scope.tcc
     src/overloads.h
@@ -148,6 +160,8 @@ install(
     src/reflect.h
     src/ref_type.h
     src/registry.h
+    src/traits.h
+    src/traits.tcc
     src/type.h
     src/type.tcc
     src/type_vector.h
@@ -169,15 +183,16 @@ install(
     src/dsl/template.h
     src/dsl/operators.h
     src/dsl/plumbing.h
+    src/dsl/type.h
     DESTINATION
-    include/reflect/reflect)
+    include/reflect/dsl)
 
 install(
     FILES
     src/types/primitives.h
     src/types/pointer.h
     DESTINATION
-    include/reflect/types/reflect)
+    include/reflect/types)
 
 install(
     FILES
